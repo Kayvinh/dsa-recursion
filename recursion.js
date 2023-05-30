@@ -26,9 +26,22 @@ function longest(words) {
 }
 
 /** everyOther: return a string with every other letter. */
+//'apple' -> 'ape' -> Math.floor(returnString.length) = str/2
+//'poop' -> 'po' -> Math.floor(returnString.length) = str/2
+
 
 function everyOther(str) {
+  //base:
+  if (str.length === 1) return str;
 
+
+//recursive:
+  return str[0] + everyOther(str.slice(2));
+  //a + ple
+    //p + e
+        // e
+
+  //a + p + e -> ape
 }
 
 /** find: return boolean depending on if val exists in array or not. */
