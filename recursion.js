@@ -68,56 +68,33 @@ function revString(str) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-// ["1", "2", "3", "4", "5"]    3   = index   
-// 2, 3, 4, 5                   2    
+// ["1", "2", "3", "4", "5"]    3   = index
+// 2, 3, 4, 5                   2
 // 3, 4, 5                      1
 // 4, 5             FOUND       0
 
 function findIndex(arr, val) {
   // if (i === arr.length) return -1;
-
   // if (arr[i] === val) return i;
-
   // return findIndex(arr, val, ++i);
 
+  if (!arr.length) return -1;
+  if (arr[0] === val) return 0;
 
-  // BC
-  if (arr.length === 0) return -1;
+  const found = findIndex(arr.slice(1), val);
 
-
-
+  return found === -1 ? -1 : found + 1;
 }
 
-
-
 /** gatherStrings: given an object, return an array of all of the string values. */
-// let nestedObj = {
-//   firstName: "Lester",
-//   favoriteNumber: 22,
-//   moreData: {
-//     lastName: "Testowitz"
-//   },
-//   funFacts: {
-//     moreStuff: {
-//       anotherNumber: 100,
-//       deeplyNestedString: {
-//         almostThere: {
-//           success: "you made it!"
-//         }
-//       }
-//     },
-//     favoriteString: "nice!"
-//   }
-// };
-
 
 function gatherStrings(obj) {
   const stringVals = [];
-  for (const key in obj){
-    if (typeof obj[key] === 'string') stringVals.push(obj[key]);
-    if (typeof obj[key] === 'object') {
-       const subArr = gatherStrings(obj[key]);
-       stringVals.push(...subArr);
+  for (const key in obj) {
+    if (typeof obj[key] === "string") stringVals.push(obj[key]);
+    if (typeof obj[key] === "object") {
+      const subArr = gatherStrings(obj[key]);
+      stringVals.push(...subArr);
     }
   }
 
@@ -129,24 +106,26 @@ function gatherStrings(obj) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-
 function binarySearch(arr, val) {
-  if (arr.length === 1 && arr[0] !== val) return false;
+  if (!arr.length) return false;
+  if (arr[0] === val) return true;
 
   const middle = Math.floor(arr.length / 2);
-  if(arr[middle] === val) return true;
 
-  if(arr[middle] < val) {
-    return binarySearch(arr.slice(middle));
-  } else {
-    return binarySearch(arr.slice(0, middle));
-  }
+  if (arr[middle] === val) return true;
+
+  return val > arr[middle]
+    ? binarySearch(arr.slice(middle+1), val)
+    : binarySearch(arr.slice(0, middle), val);
+
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) {}
+function binarySearchIndex(arr, val) {
+
+}
 
 // you might find the above two problems easier if you change the function signature to:
 //
