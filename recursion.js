@@ -68,35 +68,47 @@ function revString(str) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val, i = 0) {
-  if (i === arr.length) return -1;
+// ["1", "2", "3", "4", "5"]    3   = index   
+// 2, 3, 4, 5                   2    
+// 3, 4, 5                      1
+// 4, 5             FOUND       0
 
-  if (arr[i] === val) return i;
+function findIndex(arr, val) {
+  // if (i === arr.length) return -1;
 
-  return findIndex(arr, val, ++i);
+  // if (arr[i] === val) return i;
+
+  // return findIndex(arr, val, ++i);
+
+
+  // BC
+  if (arr.length === 0) return -1;
+
+
+
 }
 
 
 
 /** gatherStrings: given an object, return an array of all of the string values. */
-let nestedObj = {
-  firstName: "Lester",
-  favoriteNumber: 22,
-  moreData: {
-    lastName: "Testowitz"
-  },
-  funFacts: {
-    moreStuff: {
-      anotherNumber: 100,
-      deeplyNestedString: {
-        almostThere: {
-          success: "you made it!"
-        }
-      }
-    },
-    favoriteString: "nice!"
-  }
-};
+// let nestedObj = {
+//   firstName: "Lester",
+//   favoriteNumber: 22,
+//   moreData: {
+//     lastName: "Testowitz"
+//   },
+//   funFacts: {
+//     moreStuff: {
+//       anotherNumber: 100,
+//       deeplyNestedString: {
+//         almostThere: {
+//           success: "you made it!"
+//         }
+//       }
+//     },
+//     favoriteString: "nice!"
+//   }
+// };
 
 
 function gatherStrings(obj) {
@@ -117,8 +129,18 @@ function gatherStrings(obj) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-function binarySearch(arr, val) {
 
+function binarySearch(arr, val) {
+  if (arr.length === 1 && arr[0] !== val) return false;
+
+  const middle = Math.floor(arr.length / 2);
+  if(arr[middle] === val) return true;
+
+  if(arr[middle] < val) {
+    return binarySearch(arr.slice(middle));
+  } else {
+    return binarySearch(arr.slice(0, middle));
+  }
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
