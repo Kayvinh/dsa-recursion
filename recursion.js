@@ -36,7 +36,11 @@ function everyOther(str) {
 
 
 //recursive:
+  if (str.length > 1){
   return str[0] + everyOther(str.slice(2));
+  }else{
+    return str;
+  }
   //a + ple
     //p + e
         // e
